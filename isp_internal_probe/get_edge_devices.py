@@ -11,7 +11,7 @@ def table_exists(cursor, table_name):
 
 if __name__ == "__main__":
 
-    url= config.server + "api/get_edge_devices_by_client_v2_msp.php"
+    url= config.server + "api/get_edge_devices_by_client_v2.php"
     print(url)
     #Payload
     data = {
