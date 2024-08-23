@@ -1,0 +1,14 @@
+#!/bin/bash
+# This script sets up the server with the provided parameters
+
+sudo cp /etc/linkeye/internal/* /home/isp_internal_probe/
+sudo -s -D /home/isp_internal_probe python3 netconf.py
+sudo sleep 15
+sudo -s -D /home/isp_internal_probe  python3 change_dcadmin_password.py
+
+sudo -s -D /home/isp_internal_probe  python3 encrypt.py
+sudo rm /home/isp_internal_probe/config.json /home/isp_internal_probe/encrypt.py
+sudo rm /etc/linkeye/internal/config.json /etc/linkeye/internal/encrypt.py
+
+
+sudo -s -D /home/isp_internal_probe  python3 health_wg.py

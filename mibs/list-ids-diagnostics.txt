@@ -1,0 +1,7 @@
+IP-FORWARD-MIB.mib:230: index element `inetCidrRoutePolicy' of row `inetCidrRouteEntry' should but cannot have a size restriction
+VMWARE-VMON-MIB.mib: No such file or directory
+smidump: cannot locate module `VMWARE-VMON-MIB.mib'
+VMWARE-NSX-MIB.mib: No such file or directory
+smidump: cannot locate module `VMWARE-NSX-MIB.mib'
+VMWARE-HCX-MIB.mib: No such file or directory
+smidump: cannot locate module `VMWARE-HCX-MIB.mib'

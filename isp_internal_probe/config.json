@@ -1,0 +1,45 @@
+{
+    "server": "https://us.magicapi.linkeye.io/",
+    "cust_id": [
+        "AIR_001"
+    ],
+    "headers": {
+        "Content_Type": "text/html; charset=UTF-8"
+    },
+    "creds": {
+        "username": "api_user",
+        "password": "gm%5$FxX#N1$Z@0#^"
+    },
+    "client_id": "CUST_ID",
+    "mysql_conf": {
+        "host": "localhost",
+        "user": "root",
+        "password": "GyanFilo@2023",
+        "port": "3306",
+        "database": "filo_nms",
+        "auth_plugin": "mysql_native_password"
+    },
+    "influx_conf": {
+        "url": "",
+        "org": "",
+        "token": "",
+        "bucket": ""
+    },
+    "telegraf_conf": {
+        "token": ""
+    },
+    "wg_conf":{
+        "wg_server": "",
+        "wg_password": "",
+        "wg_link": "",
+        "wg_username": "",
+        "wg_subnet": "",
+        "wg_connection": "",
+        "wg_http_port": 443,
+        "wg_udp_port": 51820
+    },
+    "payload_creds":{
+        "username": "",
+        "password": ""
+    }
+}
