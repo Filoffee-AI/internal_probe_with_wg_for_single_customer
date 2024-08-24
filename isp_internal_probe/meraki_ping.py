@@ -20,4 +20,4 @@ response = dashboard.devices.createDeviceLiveToolsPing(
     }
 )
 
-print(response)
+# print(response)

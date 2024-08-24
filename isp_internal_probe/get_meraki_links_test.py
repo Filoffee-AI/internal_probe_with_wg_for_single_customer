@@ -58,7 +58,7 @@ def pull_isp_data(org_id, api_key):
             continue
         
         links = device_dict['uplinks']
-        print(links)
+        # print(links)
 
         for link in links:
             interface = link['interface']
@@ -78,7 +78,7 @@ def pull_isp_data(org_id, api_key):
                 public_ip = public_addr['address']
 
                 check_public_ip_sql = f"""SELECT isp_wan_id FROM fn_isp_details WHERE location_id='{location_id}' AND internal_ip='{link_ip}'"""
-                print(check_public_ip_sql)
+                # print(check_public_ip_sql)
                 cursor.execute(check_public_ip_sql)
                 res = cursor.fetchall()
 
@@ -92,7 +92,7 @@ def pull_isp_data(org_id, api_key):
 
 
                 is_exist_sql = f"""SELECT * FROM fn_isp_details WHERE edge_device_id='{device_id}' AND if_name='{if_name}'"""
-                print(is_exist_sql)
+                # print(is_exist_sql)
                 cursor.execute(is_exist_sql)
 
                 res = cursor.fetchall()
@@ -100,7 +100,7 @@ def pull_isp_data(org_id, api_key):
                 if len(res) > 0:
                     update_sql = f"""UPDATE fn_isp_details SET public_ip='{public_ip}', internal_ip='{link_ip}', default_gateway='{gateway}' 
                                    WHERE  edge_device_id='{device_id}' AND if_name='{if_name}'"""
-                    print(update_sql)
+                    # print(update_sql)
                     cursor.execute(update_sql)
                     conn.commit()
                 else:

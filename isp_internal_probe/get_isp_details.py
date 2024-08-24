@@ -24,7 +24,7 @@ if __name__ == "__main__":
     response = requests.post(url, headers=config.headers, json=data , verify=False)
     response_data = response.json()
 
-    print(response_data)
+    # print(response_data)
 
     links = []
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
                 insert_sql = f"""INSERT INTO `fn_isp_details` (`isp_wan_id`, `cust_id`, `location_id`, `edge_device_id`, `public_ip`, `private_ip`, `internal_ip`, `vendor_id`, `default_gateway`, `firewall_ip`, `link_type`, `if_name`, `if_index`) 
                                 VALUES ('{isp_wan_id}', '{cust_id}', '{location_id}','{device_id}', '{public_ip}', '{private_ip}', '{internal_ip}', '{vendor_id}', '{default_gateway}', '{firewall_ip}', '{link_type}', '{if_name}', '{if_index}')"""
-                print(insert_sql)
+                # print(insert_sql)
                 cursor.execute(insert_sql)
                 conn.commit()
             except Exception as err:

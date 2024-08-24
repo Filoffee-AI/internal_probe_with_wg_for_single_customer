@@ -20,7 +20,7 @@ def find_plj_for_meraki_device_links(cust_id, isp_wan_id, internal_ip, if_name, 
     # print(url, payload, headers)
     response = requests.get(url, headers=headers, data=payload)
     data_arr = response.json()
-    print(data_arr)
+    # print(data_arr)
 
     min_rtt = 0
     avg_rtt = 0
@@ -85,7 +85,7 @@ def find_plj_for_meraki_device_links(cust_id, isp_wan_id, internal_ip, if_name, 
                 "time": start_time
             }
     
-    print(isp_data)
+    # print(isp_data)
 
     # Push Data to core
     creds = config.creds
