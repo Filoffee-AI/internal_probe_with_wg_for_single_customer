@@ -71,7 +71,7 @@ def calculate_bw_push(isp_wan_id, public_ip):
 
             # Send data to the API
             # print(isp_stats)
-            api_path = config.server + "api/push_isp_statistics_with_time_stamp_msp.php"
+            api_path = config.server + "api/push_isp_statistics_with_time_stamp.php"
             api_response = requests.post(api_path, json=dict, verify=False)
             api_response.raise_for_status()
             # print(f'API response: {api_response.json()}')

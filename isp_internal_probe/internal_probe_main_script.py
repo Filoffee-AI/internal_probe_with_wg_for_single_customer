@@ -22,7 +22,7 @@ if __name__ == "__main__":
         'cust_id': cust_id
     }
     # print(json_data)
-    api_path = server + "api/get_p2p_mtls_public_ips_by_customer_msp.php"
+    api_path = server + "api/get_p2p_mtls_public_ips_by_customer.php"
     api_response = requests.post(api_path, json=json_data, verify=False)
     isp_arr = api_response.json()['isp_data']
     # print(isp_arr)
