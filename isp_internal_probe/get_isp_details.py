@@ -13,7 +13,7 @@ def table_exists(cursor, table_name):
 
 if __name__ == "__main__":
 
-    url= config.server + "api/get_isp_links_v2_msp.php"
+    url= config.server + "api/get_isp_links_v2.php"
 
     #Payload
     data = {
