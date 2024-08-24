@@ -110,7 +110,7 @@ def test_device_credentials(data):
     }
     url = config.server + "api/push_snmp_ssh_status_of_edge_device.php"
     headers = {'Content-Type': 'application/json'}
-    print(payload)
+    # print(payload)
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
         print(data[3], response.json())
