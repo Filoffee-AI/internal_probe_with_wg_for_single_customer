@@ -21,7 +21,7 @@ def send_isp_ed_data_to_core(data):
             "cust_id": config.client_id,
             "link_device_arr": data
         }
-        print(payload)
+        # print(payload)
         api_path = config.server + "api/push_isp_link_ifindex.php"
 
         api_response = requests.post(api_path, json=payload, verify=False)

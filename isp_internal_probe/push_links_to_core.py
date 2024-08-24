@@ -51,7 +51,7 @@ def main():
 
         api_path = config.server + "api/push_link_data_for_msp.php"
 
-        print(payload)
+        # print(payload)
         api_response = requests.post(api_path, json=payload, verify=False)
         api_response.raise_for_status()
         response = api_response.json()
