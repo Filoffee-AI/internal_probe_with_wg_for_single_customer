@@ -1,5 +1,5 @@
 {
-    "server": "https://us.magicapi.linkeye.io/",
+    "server": "http://magicoreinternal.linkeye.io/",
     "cust_id": [
         "AIR_001"
     ],
@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "GYAN-FILO-2024",
+    "client_id": "CUSTOM_CLIENT_ID",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -29,12 +29,12 @@
         "token": ""
     },
     "wg_conf":{
-        "wg_server": "",
-        "wg_password": "",
-        "wg_link": "",
-        "wg_username": "",
-        "wg_subnet": "",
-        "wg_connection": "",
+        "wg_server": "10.80.0.100",
+        "wg_password": "AHJXHZ@vrven899",
+        "wg_link": "wg.linkeye.io",
+        "wg_username": "root",
+        "wg_subnet": "10.80.8.0/21",
+        "wg_connection": "linkeye.io",
         "wg_http_port": 443,
         "wg_udp_port": 51820
     },
