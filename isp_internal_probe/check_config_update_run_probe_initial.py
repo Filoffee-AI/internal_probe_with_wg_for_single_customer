@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 if __name__ == "__main__":
-    api_path = config.server + "api/check_config_change_msp.php"
+    api_path = config.server + "api/check_config_change.php"
     payload = {
         "creds": config.creds,
         "cust_id": config.client_id,
