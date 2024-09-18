@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "bescom045",
+    "client_id": "testingqa",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "filoffee",
-        "password": "Filo@2024"
+        "username": "girish",
+        "password": "Fil0ff33@2024"
     }
 }
