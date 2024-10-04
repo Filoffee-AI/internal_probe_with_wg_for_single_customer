@@ -1,5 +1,5 @@
 {
-    "server": "http://magicoreinternal.linkeye.io/",
+    "server": "http://ispcoreinternal.linkeye.io/",
     "cust_id": [
         "AIR_001"
     ],
@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "Airtel_056",
+    "client_id": "AIRO_01",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
