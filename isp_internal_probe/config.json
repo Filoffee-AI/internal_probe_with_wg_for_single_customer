@@ -1,7 +1,7 @@
 {
     "server": "http://ispcoreinternal.linkeye.io/",
     "cust_id": [
-        "AIR_001"
+        "AarityaTechnologies_010"
     ],
     "headers": {
         "Content_Type": "text/html; charset=UTF-8"
@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "AIRO_01",
+    "client_id": "AarityaTechnologies_010",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "linekye",
+        "username": "linkeye",
         "password": "L1nk@2023"
     }
 }
