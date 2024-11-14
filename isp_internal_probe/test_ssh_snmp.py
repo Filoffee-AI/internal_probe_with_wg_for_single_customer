@@ -112,7 +112,7 @@ def test_device_credentials(data):
     headers = {'Content-Type': 'application/json'}
     # print(payload)
     try:
-        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        response = requests.post(url, headers=headers, data=json.dumps(payload), verify=False)
         print(data[3], response.json())
     except Exception as e:
         print(e)
