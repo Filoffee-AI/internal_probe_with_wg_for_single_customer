@@ -1,7 +1,7 @@
 {
     "server": "http://ispcoreinternal.linkeye.io/",
     "cust_id": [
-        "COROMANDEL_CUSTOMER_01"
+        "compassgroup_001"
     ],
     "headers": {
         "Content_Type": "text/html; charset=UTF-8"
