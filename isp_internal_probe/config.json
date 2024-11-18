@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "COROMANDEL_CUSTOMER_01",
+    "client_id": "compassgroup_001",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "linkeye",
-        "password": "L1nk@2023"
+        "username": "ubuntu",
+        "password": "Fujitsu.2017"
     }
 }
