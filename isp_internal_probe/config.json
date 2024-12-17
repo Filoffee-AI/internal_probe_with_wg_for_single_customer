@@ -1,7 +1,7 @@
 {
     "server": "http://magicoreinternal.linkeye.io/",
     "cust_id": [
-        "compassgroup_001"
+        "TELERADIOLLGY_SOLUTION_01"
     ],
     "headers": {
         "Content_Type": "text/html; charset=UTF-8"
@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "compassgroup_001",
+    "client_id": "TELERADIOLLGY_SOLUTION_01",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "ubuntu",
-        "password": "Fujitsu.2017"
+        "username": "trsit",
+        "password": "Yellow@4321"
     }
 }
