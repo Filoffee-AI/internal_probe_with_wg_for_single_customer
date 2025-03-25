@@ -11,6 +11,7 @@ import re
 from paramiko.ssh_exception import AuthenticationException, SSHException
 from config_class import config
 import requests
+from easysnmp import Session, exceptions as easysnmp_exceptions
 
 def get_and_push_plj_values_for_cisco_router(output, cust_id, isp_wan_id, internal_ip):
 
@@ -231,7 +232,7 @@ def get_and_push_plj_values(output, cust_id, isp_wan_id, internal_ip):
         "creds": creds,
         "isp_data": isp_data
     }
-
+    print(isp_data)
     try:
 
         api_path = server + "api/push_isp_data.php"
@@ -240,6 +241,95 @@ def get_and_push_plj_values(output, cust_id, isp_wan_id, internal_ip):
     except Exception as e:
         print("Error in Pushing Data", e)
 
+def get_and_push_plj_values_for_lavelle_sdwan(output, cust_id, isp_wan_id, internal_ip):
+    min_latency = 1
+    max_latency = 1
+    avg_latency = 1
+    jitter = 1
+    packet_loss = 1
+    status = 1 if output.value == '1' else 0
+    if output is None:
+        isp_data = {
+                    "isp_wan_id": isp_wan_id,
+                    "client_id": cust_id,
+                    "circuit_id": "NA",
+                    "public_ip": internal_ip,
+                    "min_rtt": 0,
+                    "avg_rtt": 0,
+                    "max_rtt": 0,
+                    "jitter": 0,
+                    "packet_loss": 100,
+                    "status": 0,
+                    "dg_ip": '0.0.0.0',
+                    "dg_status": 1,
+                    "dg_min_rtt": 0,
+                    "dg_max_rtt": 0,
+                    "dg_avg_rtt": 0,
+                    "dg_jitter": 0,
+                    "dg_packet_loss": 0,
+                    "time": start_time
+        }
+    else:
+        try:
+            
+            isp_data = {
+                "isp_wan_id": isp_wan_id,
+                "client_id": cust_id,
+                "circuit_id": "NA",
+                "public_ip": internal_ip,
+                "min_rtt": min_latency,
+                "avg_rtt": avg_latency,
+                "max_rtt": max_latency,
+                "jitter": jitter,
+                "packet_loss": packet_loss,
+                "status": status,
+                "dg_ip": '0.0.0.0',
+                "dg_status": 1,
+                "dg_min_rtt": 0,
+                "dg_max_rtt": 0,
+                "dg_avg_rtt": 0,
+                "dg_jitter": 0,
+                "dg_packet_loss": 0,
+                "time": start_time
+            }
+        except Exception as e:
+            isp_data = {
+                    "isp_wan_id": isp_wan_id,
+                    "client_id": cust_id,
+                    "circuit_id": "NA",
+                    "public_ip": internal_ip,
+                    "min_rtt": 0,
+                    "avg_rtt": 0,
+                    "max_rtt": 0,
+                    "jitter": 0,
+                    "packet_loss": 100,
+                    "status": 0,
+                    "dg_ip": '0.0.0.0',
+                    "dg_status": 1,
+                    "dg_min_rtt": 0,
+                    "dg_max_rtt": 0,
+                    "dg_avg_rtt": 0,
+                    "dg_jitter": 0,
+                    "dg_packet_loss": 0,
+                    "time": start_time
+                }
+    # Push Data to core
+    creds = config.creds
+    server = config.server
+    cust_id = config.client_id
+    
+    json_data = {
+        "creds": creds,
+        "isp_data": isp_data
+    }
+
+    try:
+
+        api_path = server + "api/push_isp_data.php"
+        api_response = requests.post(api_path, json=json_data, verify=False)
+        print(api_response.json())
+    except Exception as e:
+        print("Error in Pushing Data", e)
 
 def find_plj_for_Cisco_Router_device_links(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port):
     command = f"ping {internal_ip}"
@@ -341,8 +431,58 @@ def find_plj_for_silverpeak_device_links(cust_id, isp_wan_id, internal_ip, if_na
         ssh.close()
 
 
-def get_plj_dbb_link(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, vendor, type, device_serial, default_gateway, api_key, api_port):
+def find_plj_for_Lavelle_sdwan_device_links(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, snmp_version, snmp_str, snmp_username, security_level, auth_password, privacy_type, privacy_password):
+    try:
+        if_oper_status = f'1.3.6.1.2.1.2.2.1.8.{if_index}'
+        session = None  # Initialize session to prevent errors
 
+        if snmp_version == 2:
+            session = Session(hostname=device_ip, community=snmp_str, version=2, timeout=2)
+        
+        elif snmp_version == 3:
+            if security_level == "0":
+                session = Session(hostname=device_ip, version=3, security_username=snmp_username, security_level='noAuthNoPriv', timeout=2)
+
+            elif security_level == "1":
+                session = Session(
+                    hostname=device_ip, version=3, security_username=snmp_username,
+                    auth_protocol=auth_type, auth_password=auth_password, 
+                    security_level='authNoPriv', timeout=2
+                )
+
+            elif security_level == "2":
+                session = Session(
+                    hostname=device_ip, version=3, security_username=snmp_username,
+                    auth_protocol=auth_type, auth_password=auth_password,
+                    privacy_protocol=privacy_type, privacy_password=privacy_password,
+                    security_level='authPriv', timeout=2
+                )
+            else:
+                print(f"Unsupported security level: {security_level}")
+                return device_ip, internal_ip, device_id, if_index, None, None, isp_wan_id
+        
+        else:
+            print(f"Unsupported SNMP version: {snmp_version}")
+            return device_ip, internal_ip, device_id, if_index, None, None, isp_wan_id
+
+        if not session:
+            print(f"Failed to create SNMP session for {device_ip}")
+            return device_ip, internal_ip, device_id, if_index, None, None, isp_wan_id
+
+        oper_status = session.get(if_oper_status)
+
+        get_and_push_plj_values_for_lavelle_sdwan(oper_status, cust_id, isp_wan_id, internal_ip)
+
+    except Exception as e:
+        print(f"Error pinging {internal_ip}: {e}")
+        get_and_push_plj_values_for_lavelle_sdwan(None, cust_id, isp_wan_id, internal_ip)
+        return []
+
+
+
+
+def get_plj_dbb_link(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, vendor, type, device_serial, default_gateway, api_key, api_port, snmp_version, snmp_str, snmp_username, security_level, auth_password, privacy_type, privacy_password):
+    
     if vendor == 'Viptella':
         find_plj_for_Viptella_device_links(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port)
     if vendor == 'Fortinet':
@@ -352,6 +492,9 @@ def get_plj_dbb_link(cust_id, isp_wan_id, internal_ip, if_name, if_index, device
     if vendor == 'Cisco':
         if type == 'Router':
             find_plj_for_Cisco_Router_device_links(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port)
+    if vendor == 'Lavelle':
+        if type == 'SD WAN Box':
+            find_plj_for_Lavelle_sdwan_device_links(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, snmp_version, snmp_str, snmp_username, security_level, auth_password, privacy_type, privacy_password)
 
     return
 
@@ -391,7 +534,15 @@ if __name__ == "__main__":
                             fn_edge_devices.device_serial,
                             fn_isp_details.default_gateway,
                             fn_edge_devices.api_key,
-                            fn_edge_devices.api_port		
+                            fn_edge_devices.api_port,
+                            fn_edge_devices.snmp_version,
+                            fn_edge_devices.snmp_username,
+                            fn_edge_devices.security_level,
+                            fn_edge_devices.auth_type,
+                            fn_edge_devices.auth_password,
+                            fn_edge_devices.privacy_type,
+                            fn_edge_devices.privacy_password,
+                            fn_edge_devices.snmp_str
                 FROM fn_isp_details, fn_edge_devices
                 WHERE fn_isp_details.link_type='DBB' AND fn_isp_details.edge_device_id=fn_edge_devices.device_id AND fn_edge_devices.vendor != 'Meraki'"""
     
@@ -418,8 +569,16 @@ if __name__ == "__main__":
         default_gateway = row[13]
         api_key = row[14]
         api_port = row[15]
+        snmp_version = row[16]
+        snmp_username = row[17]
+        security_level = row[18]
+        auth_type = row[19]
+        auth_password = row[20]
+        privacy_type = row[21]
+        privacy_password = row[22]
+        snmp_str = row[23]
         
-        process = multiprocessing.Process(target=get_plj_dbb_link, args=(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, vendor, type, device_serial, default_gateway, api_key, api_port))
+        process = multiprocessing.Process(target=get_plj_dbb_link, args=(cust_id, isp_wan_id, internal_ip, if_name, if_index, device_id, device_ip, ssh_username, ssh_password, ssh_port, vendor, type, device_serial, default_gateway, api_key, api_port, snmp_version, snmp_str, snmp_username, security_level, auth_password, privacy_type, privacy_password))
         process_list.append(process)
 
 
