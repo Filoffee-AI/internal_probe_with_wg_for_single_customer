@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "linkeye",
+        "username": "root",
         "password": "Fil0ff33@2025"
     }
 }
