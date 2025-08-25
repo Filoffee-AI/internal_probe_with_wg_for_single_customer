@@ -1,7 +1,7 @@
 {
     "server": "https://magicapi.linkeye.io/",
     "cust_id": [
-        "BESCOM_001"
+        "test_001"
     ],
     "headers": {
         "Content_Type": "text/html; charset=UTF-8"
