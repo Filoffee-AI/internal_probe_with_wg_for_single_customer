@@ -1,7 +1,7 @@
 {
     "server": "https://magicapi.linkeye.io/",
     "cust_id": [
-        "zep-meraki"
+        "360One_001"
     ],
     "headers": {
         "Content_Type": "text/html; charset=UTF-8"
@@ -10,7 +10,7 @@
         "username": "api_user",
         "password": "gm%5$FxX#N1$Z@0#^"
     },
-    "client_id": "zep-meraki",
+    "client_id": "360One_001",
     "mysql_conf": {
         "host": "localhost",
         "user": "root",
@@ -39,7 +39,7 @@
         "wg_udp_port": 51820
     },
     "payload_creds":{
-        "username": "root",
-        "password": "Fil0ff33@2024"
+        "username": "",
+        "password": ""
     }
 }
